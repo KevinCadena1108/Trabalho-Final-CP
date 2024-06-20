@@ -1,0 +1,11 @@
+Model Information:
+* title:	BoT Hangar | 戰鬥泰坦 機庫 3D 模型
+* source:	https://sketchfab.com/3d-models/bot-hangar-3d-9fceb29c08994d1db2edc666ea909c98
+* author:	ZLM Crafter (https://sketchfab.com/zlmalliance)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "BoT Hangar | 戰鬥泰坦 機庫 3D 模型" (https://sketchfab.com/3d-models/bot-hangar-3d-9fceb29c08994d1db2edc666ea909c98) by ZLM Crafter (https://sketchfab.com/zlmalliance) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
