@@ -1,14 +1,19 @@
-import * as THREE from 'three';
+import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 // Configuração inicial da cena, câmera e renderizador
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffffff);
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -27,44 +32,44 @@ controls.maxDistance = 160; // Distância máxima da câmera em relação ao pon
 // Carregar o palco (.obj com .mtl)
 const mtlLoaderPalco = new MTLLoader();
 mtlLoaderPalco.load(
-    'Modelo3D/palco/stage.mtl',
-    function (materials) {
-        materials.preload();
+  "Modelo3D/palco/stage.mtl",
+  function (materials) {
+    materials.preload();
 
-        const objLoaderPalco = new OBJLoader();
-        objLoaderPalco.setMaterials(materials);
-        objLoaderPalco.load(
-            'Modelo3D/palco/stage.obj',
-            function (obj) {
-                obj.position.set(0, -5, 0); // Ajustar posição do palco
-                obj.scale.set(10.0, 10.0, 15.0); // Ajustar escala do palco
-                obj.rotation.y = Math.PI / 2;
-                scene.add(obj);
+    const objLoaderPalco = new OBJLoader();
+    objLoaderPalco.setMaterials(materials);
+    objLoaderPalco.load(
+      "Modelo3D/palco/stage.obj",
+      function (obj) {
+        obj.position.set(0, -5, 0); // Ajustar posição do palco
+        obj.scale.set(10.0, 10.0, 15.0); // Ajustar escala do palco
+        obj.rotation.y = Math.PI / 2;
+        scene.add(obj);
 
-                // Posicionar a câmera centralizada na frente do palco
-                const box = new THREE.Box3().setFromObject(obj);
-                const center = box.getCenter(new THREE.Vector3());
-                const size = box.getSize(new THREE.Vector3());
+        // Posicionar a câmera centralizada na frente do palco
+        const box = new THREE.Box3().setFromObject(obj);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
 
-                camera.position.copy(center);
-                camera.position.x += size.z * 0.5; // Ajuste para posicionar mais perto do palco
-                camera.position.x += size.x * 2; // Ajuste para posicionar na frente do palco
-                camera.position.y += size.y; // Ajuste de altura
+        camera.position.copy(center);
+        camera.position.x += size.z * 0.5; // Ajuste para posicionar mais perto do palco
+        camera.position.x += size.x * 2; // Ajuste para posicionar na frente do palco
+        camera.position.y += size.y; // Ajuste de altura
 
-                camera.lookAt(center);
-                controls.target.copy(center);
-                controls.update();
-            },
-            undefined,
-            function (error) {
-                console.error('Erro ao carregar o objeto 3D do palco', error);
-            }
-        );
-    },
-    undefined,
-    function (error) {
-        console.error('Erro ao carregar o material .mtl do palco', error);
-    }
+        camera.lookAt(center);
+        controls.target.copy(center);
+        controls.update();
+      },
+      undefined,
+      function (error) {
+        console.error("Erro ao carregar o objeto 3D do palco", error);
+      }
+    );
+  },
+  undefined,
+  function (error) {
+    console.error("Erro ao carregar o material .mtl do palco", error);
+  }
 );
 
 const loader = new GLTFLoader();
@@ -106,7 +111,11 @@ loader2.load(
     for (let i = 0; i < tilesX; i++) {
       for (let j = 0; j < tilesZ; j++) {
         const floorTile = floorModel.clone();
-        floorTile.position.set(i * tileSizeX - offsetX, 0, j * tileSizeZ - offsetZ);
+        floorTile.position.set(
+          i * tileSizeX - offsetX,
+          0,
+          j * tileSizeZ - offsetZ
+        );
         scene.add(floorTile);
       }
     }
@@ -117,22 +126,23 @@ loader2.load(
   }
 );
 
+let pianoModel; // Variável para armazenar o modelo do piano
 
 const loader3 = new GLTFLoader();
 loader3.load(
-  "Modelo3D/retro_piano/scene.gltf", // substitua pelo caminho do seu modelo
+  "Modelo3D/retro_piano/scene.gltf",
   function (gltf) {
-    gltf.scene.position.set(-50, 20, -10); // Posicione o meio do modelo no centro da cena
-    gltf.scene.scale.set(0.03, 0.03, 0.03); // Reduza o tamanho do modelo
+    gltf.scene.position.set(-50, 20, -10);
+    gltf.scene.scale.set(0.03, 0.03, 0.03);
     gltf.scene.rotation.y = Math.PI / 2;
     scene.add(gltf.scene);
+    pianoModel = gltf.scene; // Armazenar o modelo do piano para uso no raycasting
   },
   undefined,
   function (error) {
     console.error(error);
   }
 );
-
 
 const loader4 = new GLTFLoader();
 loader4.load(
@@ -148,7 +158,6 @@ loader4.load(
     console.error(error);
   }
 );
-
 
 const loader5 = new GLTFLoader();
 loader5.load(
@@ -167,12 +176,34 @@ loader5.load(
 
 //camera.position.z = 10
 
-
 // Função de animação
 function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
 }
 
 animate();
+
+// Adicionar ouvinte de eventos para cliques do mouse
+document.addEventListener("click", onDocumentMouseClick, false);
+
+function onDocumentMouseClick(event) {
+  event.preventDefault();
+
+  const mouse = new THREE.Vector2();
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  const raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(mouse, camera);
+
+  if (pianoModel) {
+    const intersects = raycaster.intersectObject(pianoModel, true);
+
+    if (intersects.length > 0) {
+      // Abrir outro arquivo ou executar ação desejada
+      window.open("http://127.0.0.1:5500/piano/index.html", "_blank");
+    }
+  }
+}
