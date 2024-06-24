@@ -184,7 +184,10 @@ scene.add(directionalLight);
 scene.add(directionalLight.target);
 
 // Adicionar helper para visualizar a luz direcional
-const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight, 5);
+const directionalLightHelper = new THREE.DirectionalLightHelper(
+  directionalLight,
+  5
+);
 scene.add(directionalLightHelper);
 
 // Adicionar luz direcional
@@ -195,7 +198,10 @@ scene.add(directionalLight2);
 scene.add(directionalLight2.target);
 
 // Adicionar helper para visualizar a luz direcional
-const directionalLightHelper2 = new THREE.DirectionalLightHelper(directionalLight2, 5);
+const directionalLightHelper2 = new THREE.DirectionalLightHelper(
+  directionalLight2,
+  5
+);
 scene.add(directionalLightHelper2);
 
 // Adicionar luz direcional
@@ -206,7 +212,10 @@ scene.add(directionalLight3);
 scene.add(directionalLight3.target);
 
 // Adicionar helper para visualizar a luz direcional
-const directionalLightHelper3 = new THREE.DirectionalLightHelper(directionalLight3, 5);
+const directionalLightHelper3 = new THREE.DirectionalLightHelper(
+  directionalLight3,
+  5
+);
 scene.add(directionalLightHelper3);
 
 // Adicionar luz direcional
@@ -217,7 +226,10 @@ scene.add(directionalLight4);
 scene.add(directionalLight4.target);
 
 // Adicionar helper para visualizar a luz direcional
-const directionalLightHelper4 = new THREE.DirectionalLightHelper(directionalLight4, 5);
+const directionalLightHelper4 = new THREE.DirectionalLightHelper(
+  directionalLight4,
+  5
+);
 scene.add(directionalLightHelper4);
 // Função de animação
 function animate() {
@@ -245,7 +257,6 @@ function onDocumentMouseClick(event) {
     const intersects = raycaster.intersectObject(pianoModel, true);
 
     if (intersects.length > 0) {
-      // Abrir outro arquivo ou executar ação desejada
       window.open("http://127.0.0.1:5500/piano/index.html", "_blank");
     }
   }
