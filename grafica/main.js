@@ -257,7 +257,7 @@ function onDocumentMouseClick(event) {
     const intersects = raycaster.intersectObject(pianoModel, true);
 
     if (intersects.length > 0) {
-      window.open("http://127.0.0.1:5500/piano/index.html", "_blank");
+      window.open("http://127.0.0.1:5500/piano/index.html", "_self");
     }
   }
 }
