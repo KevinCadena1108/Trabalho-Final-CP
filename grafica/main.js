@@ -20,7 +20,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Luz ambiente fraca
-const ambientLight = new THREE.AmbientLight(0xffffff, 10);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
 // Controles de órbita
@@ -183,26 +183,12 @@ directionalLight.target.position.set(-50, 20, -10); // Direcionar a luz para o p
 scene.add(directionalLight);
 scene.add(directionalLight.target);
 
-// Adicionar helper para visualizar a luz direcional
-const directionalLightHelper = new THREE.DirectionalLightHelper(
-  directionalLight,
-  5
-);
-scene.add(directionalLightHelper);
-
 // Adicionar luz direcional
 const directionalLight2 = new THREE.DirectionalLight(0xffffff, 5);
 directionalLight2.position.set(70, 98, 32);
 directionalLight2.target.position.set(-50, 20, 40); // Direcionar a luz para o piano
 scene.add(directionalLight2);
 scene.add(directionalLight2.target);
-
-// Adicionar helper para visualizar a luz direcional
-const directionalLightHelper2 = new THREE.DirectionalLightHelper(
-  directionalLight2,
-  5
-);
-scene.add(directionalLightHelper2);
 
 // Adicionar luz direcional
 const directionalLight3 = new THREE.DirectionalLight(0xffffff, 5);
@@ -211,13 +197,6 @@ directionalLight3.target.position.set(30, 15, 60); // Direcionar a luz para o pi
 scene.add(directionalLight3);
 scene.add(directionalLight3.target);
 
-// Adicionar helper para visualizar a luz direcional
-const directionalLightHelper3 = new THREE.DirectionalLightHelper(
-  directionalLight3,
-  5
-);
-scene.add(directionalLightHelper3);
-
 // Adicionar luz direcional
 const directionalLight4 = new THREE.DirectionalLight(0xffffff, 5);
 directionalLight4.position.set(70, 98, -22);
@@ -225,12 +204,6 @@ directionalLight4.target.position.set(40, 15, -60); // Direcionar a luz para o p
 scene.add(directionalLight4);
 scene.add(directionalLight4.target);
 
-// Adicionar helper para visualizar a luz direcional
-const directionalLightHelper4 = new THREE.DirectionalLightHelper(
-  directionalLight4,
-  5
-);
-scene.add(directionalLightHelper4);
 // Função de animação
 function animate() {
   requestAnimationFrame(animate);
